@@ -1,5 +1,7 @@
 # 🌲 GitForest 🌲
 
+# 🚧 Project is currently under construction
+
 ## 🤨 What is it?
 
 GitForest is a dynamic, visually driven GitHub profile enhancement that
