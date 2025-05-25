@@ -35,7 +35,7 @@ and new elements appear as the ecosystem grows
 - [X] Complete at least 2 Trees or other elements
 - [X] Create Background
 - [X] Make README
-- [ ] Test if a library for embedding SVG is working
+- [X] Test if a library for embedding SVG is working
 - [ ] Test different inputs
 - [ ] Integrate GitHub API
 - MIGHT TAKE LONGER:
