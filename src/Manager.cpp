@@ -8,7 +8,7 @@ jsonFileManager(totalCommits, totalPrs, placedSpruces, placedCherryBlossomTrees)
 }
 void Manager::init() {
     // Loading background
-    background.load_file("../forest.svg");
+    background.load_file("../assets/forest.svg");
 
     if (!background) {
         std::cerr << "Failed to load forest.svg" << '\n';
