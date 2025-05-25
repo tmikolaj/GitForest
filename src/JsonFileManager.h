@@ -1,17 +1,20 @@
 #ifndef JSONFILEMANAGER_H
 #define JSONFILEMANAGER_H
 
+#include <fstream>
+#include <sstream>
+#include <string>
 #include "../external-libraries/rapidjson/document.h"
 #include "../external-libraries/rapidjson/reader.h"
-#include "../external-libraries/rapidjson/writer.h"
+#include "../external-libraries/rapidjson/prettywriter.h"
 
 class JsonFileManager {
 private:
-    int m_totalCommits;
-    int m_totalPrs;
+    int& m_totalCommits;
+    int& m_totalPrs;
 
-    int m_placedSpruces;
-    int m_placedCherryBlossomTrees;
+    int& m_placedSpruces;
+    int& m_placedCherryBlossomTrees;
 public:
     JsonFileManager(int& totalCommits, int& totalPrs, int& placedSpruces, int& placedCherryBlossomTrees);
     ~JsonFileManager() = default;
