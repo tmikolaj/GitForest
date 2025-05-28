@@ -1,19 +1,15 @@
+#define CATCH_CONFIG_MAIN
 #include <vector>
 #include <random>
 #include <iostream>
 #include "catch_amalgamated.hpp"
+#include "globals.h"
 
 std::random_device rd;
 std::mt19937 gen(rd());
 
 const int COMMITS_FOR_SPRUCE = 25;
 const int PRS_FOR_CHERRY_BLOSSOM_TREE = 10;
-
-int totalCommits = 0;
-int totalPrs = 0;
-
-int placedSpruces = 0;
-int placedCherryBlossomTrees = 0;
 
 int resSpruce;
 int resCherryBlossomTree;
