@@ -7,8 +7,7 @@ JsonFileManager::JsonFileManager(int& totalCommits, int& totalPrs, int& placedSp
 void JsonFileManager::loadJsonFile() {
     std::ifstream jsonFile("../saved.json");
     if (!jsonFile.is_open()) {
-        std::cerr << "Failed to open json file\n";
-        exit(1);
+        throw std::runtime_error("JsonFileManager::loadJsonFile: Could not open json file ('../saved.json')");
     }
     std::stringstream buffer;
     buffer << jsonFile.rdbuf(); // stores json data in string stream
@@ -19,26 +18,24 @@ void JsonFileManager::loadJsonFile() {
     doc.Parse(jsonString.c_str());
 
     if (doc.HasParseError()) {
-        std::cerr << "Error parsing json file\n";
-        exit(1);
+        throw std::runtime_error("JsonFileManager::loadJsonFile(): Failed to parse json file ('../saved.json')");
     }
 
     if (doc.HasMember("placedSpruces") && doc["placedSpruces"].IsInt()) {
         m_placedSpruces = doc["placedSpruces"].GetInt();
     } else {
-        std::cerr << "Loading json error! Missing or invalid 'placedSpruces' key in json file\n";
+        throw std::runtime_error("JsonFileManager::loadJsonFile(): missing or invalid 'placedSpruces'");
     }
     if (doc.HasMember("placedCherryBlossomTrees") && doc["placedCherryBlossomTrees"].IsInt()) {
         m_placedCherryBlossomTrees = doc["placedCherryBlossomTrees"].GetInt();
     } else {
-        std::cerr << "Loading json error! Missing or invalid 'placedCherryBlossoms' key in json file\n";
+        throw std::runtime_error("JsonFileManager::loadJsonFile(): missing or invalid 'placedCherryBlossomTrees'");
     }
 }
 void JsonFileManager::saveJsonFile() {
     std::ifstream jsonFile("../saved.json");
     if (!jsonFile.is_open()) {
-        std::cerr << "Failed to open json file\n";
-        exit(1);
+        throw std::runtime_error("JsonFileManager::saveJsonFile: Could not open json file ('../saved.json')");
     }
     std::stringstream buffer;
     buffer << jsonFile.rdbuf();
@@ -49,17 +46,18 @@ void JsonFileManager::saveJsonFile() {
     doc.Parse(jsonString.c_str());
 
     if (doc.HasParseError()) {
-        std::cerr << "Error parsing json file\n";
-        exit(1);
+        throw std::runtime_error("JsonFileManager::loadJsonFile(): Failed to parse json file ('../saved.json')");
     }
 
     if (doc.HasMember("placedSpruces") && doc["placedSpruces"].IsInt()) {
         doc["placedSpruces"].SetInt(m_placedSpruces);
     } else {
-        std::cerr << "Saving json error! Missing or invalid 'placedSpruces' key in json\n";
+        throw std::runtime_error("JsonFileManager::loadJsonFile(): missing or invalid 'placedSpruces'");
     }
     if (doc.HasMember("placedCherryBlossomTrees") && doc["placedCherryBlossomTrees"].IsInt()) {
         doc["placedCherryBlossomTrees"].SetInt(m_placedCherryBlossomTrees);
+    } else {
+        throw std::runtime_error("JsonFileManager::loadJsonFile(): missing or invalid 'placedCherryBlossomTrees'");
     }
 
     // Writing to json file
