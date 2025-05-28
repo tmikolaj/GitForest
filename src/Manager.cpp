@@ -41,7 +41,6 @@ void Manager::load() {
 void Manager::process() {
     std::cout << "processing variables\n";
     // Calculating how many of each tree needs to be added
-    // To do: refactor these 2 lines into 4
     int spruceCount = (totalCommits / COMMITS_FOR_SPRUCE) - placedSpruces;
     int cherryBlossomTreeCount = (totalPrs / PRS_FOR_CHERRY_BLOSSOM_TREE) - placedCherryBlossomTrees;
 
@@ -80,11 +79,6 @@ void Manager::process() {
 }
 void Manager::save() {
     std::cout << "saving variables\n";
-    bool saveSuccessful = background.save_file("forest.svg");
-
-    if (!saveSuccessful) {
-        std::cerr << "Saving forest.svg failed!" << '\n';
-    }
     jsonFileManager.saveJsonFile();
     std::cout << "save succesful\n";
 }
