@@ -3,6 +3,8 @@ project(GitForest)
 
 set(CMAKE_CXX_STANDARD 20)
 
+add_subdirectory(tests)
+
 # Adding pugixml source
 set(PUGIXML_SRC external-libraries/pugixml/pugixml.cpp)
 
