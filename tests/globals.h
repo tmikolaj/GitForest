@@ -7,4 +7,6 @@ extern int totalPrs;
 extern int placedSpruces;
 extern int placedCherryBlossomTrees;
 
+extern int forests;
+
 #endif //GLOBALS_H
