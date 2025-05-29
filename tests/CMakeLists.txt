@@ -1,7 +1,7 @@
 add_executable(GitForest_tests
         catch2/catch_amalgamated.cpp
         process_func_test.cpp
-        load_save_json_func_test.cpp
+        load_save_refresh_json_func_test.cpp
         globals.h
         globals.cpp
         ../src/JsonFileManager.h
