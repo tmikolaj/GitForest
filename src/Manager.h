@@ -34,11 +34,15 @@ private:
     int totalCommits;
     int totalPrs;
 
+    int forests;
+
     JsonFileManager jsonFileManager;
 
     void load(); // loads all stored data
     void process(); // checks how many trees to place and places them
     void save(); //saves all data (overwriting previously saved one
+    void resetBackground(); // resets background (clears xml code) then loads fresh background and calls refresh method
+    // from JsonFileManager class which refills vector with available positions for trees
 public:
     Manager(Sprite spruce, Sprite cherryBlossomTree, std::vector<float> positions);
     ~Manager() = default;
