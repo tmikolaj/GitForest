@@ -3,7 +3,7 @@
 Manager::Manager(Sprite spruce, Sprite cherryBlossomTree, std::vector<float> positions) : gen(rd()),
 m_spruce(spruce), m_cherryBlossomTree(cherryBlossomTree), m_positions(positions),
 placedSpruces(-1), placedCherryBlossomTrees(-1), totalCommits(-1), totalPrs(-1),
-jsonFileManager(totalCommits, totalPrs, placedSpruces, placedCherryBlossomTrees) {
+jsonFileManager(totalCommits, totalPrs, placedSpruces, placedCherryBlossomTrees, forests, m_positions) {
 
 }
 void Manager::init() {
@@ -48,7 +48,7 @@ void Manager::process() {
     // The "random" placement logic not completed!!!
     for (int i = 0; i < spruceCount; i++) {
         if (m_positions.empty()) {
-            exit(1); // Temporary
+            resetBackground();
         }
         std::uniform_int_distribution<> distr(0, m_positions.size() - 1);
 
@@ -62,7 +62,7 @@ void Manager::process() {
     // Instantiating cherry blossom trees
     for (int i = 0; i < cherryBlossomTreeCount; i++) {
         if (m_positions.empty()) {
-            exit(1); // Temporary
+            resetBackground();
         }
         std::uniform_int_distribution<> distr(0, m_positions.size() - 1);
 
@@ -81,4 +81,13 @@ void Manager::save() {
     std::cout << "saving variables\n";
     jsonFileManager.saveJsonFile();
     std::cout << "save succesful\n";
+}
+void Manager::resetBackground() {
+    background.reset();
+    pugi::xml_parse_result result = background.load_file("../assets/Background.svg");
+
+    if (!result) {
+        throw std::runtime_error("Manager::resetBackground: Failed to load ../assets/Background.svg");
+    }
+    jsonFileManager.refresh();
 }
