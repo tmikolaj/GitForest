@@ -1,4 +1,3 @@
-#define CATCH_CONFIG_MAIN
 #include <fstream>
 #include <cstdio> // std::remove (for file removing)
 #include <string>
