@@ -18,7 +18,7 @@ jobs:
 
       - name: Set saved.json to default content
         run: |
-          cd $(dirname #$GITHUB_WORKSPACE") # one directory up
+          cd "$GITHUB_WORKSPACE"
           cat <<EOF > saved.json
           {
             "placedSpruces": 0,
@@ -50,5 +50,11 @@ jobs:
           git config user.name "github-actions"
           git config user.email "actions@github.com"
           
-          git commit -m "Reset saved.json"
-          git push
+          git add saved.json
+          
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Reset saved.json"
+            git push
+          fi
