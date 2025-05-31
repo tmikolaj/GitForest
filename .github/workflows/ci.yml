@@ -1,0 +1,67 @@
+name: ci
+
+on:
+  schedule:
+    - cron: '*/10 * * * *' # every 10 minutes
+
+permissions:
+  contents: write # Needed for git push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Install build tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ninja-build cmake jq
+
+      - name: Fetch API data
+        env:
+          GITHUB_TOKEN: ${{ secrets.API_KEY }}
+          USER: ${{ vars.USERNAME }}
+          CURR_YEAR: ${{ vars.YEAR }}
+        run: |
+          START_DATE="${CURR_YEAR}-01-01"
+          END_DATE="${CURR_YEAR}-12-31"
+
+          curl -s -H "Authorization: token $GITHUB_TOKEN" \
+               -H "Accept: application/vnd.github.cloak-preview" \
+               "https://api.github.com/search/commits?q=author:${USER}+committer-date:${START_DATE}..${END_DATE}&per_page=100" \
+               > commits.json
+
+          curl -s -H "Authorization: token $GITHUB_TOKEN" \
+               "https://api.github.com/search/issues?q=author:${USER}+type:pr+created:${START_DATE}..${END_DATE}&per_page=100" \
+               > prs.json
+
+          jq -s '{ commits: .[0].items, prs: .[1].items }' commits.json prs.json > apidata.json
+          rm commits.json prs.json
+
+      - name: Build and run tests
+        run: |
+          mkdir -p build
+          cd build
+          cmake .. -GNinja
+          ninja
+          ctest --output-on-failure
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+
+          # Only commit if there are changes
+          if git diff --quiet && git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git add apidata.json saved.json assets/forest.svg
+            git commit --amend --no-edit || echo "Nothing to amend"
+            git push --force
+          fi
