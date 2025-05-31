@@ -12,6 +12,4 @@ target_include_directories(GitForest_tests PRIVATE catch2)
 
 target_compile_features(GitForest_tests PRIVATE cxx_std_20)
 
-enable_testing()
-
 add_test(NAME GitForestTests COMMAND GitForest_tests)

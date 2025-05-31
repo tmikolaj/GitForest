@@ -3,6 +3,7 @@ project(GitForest)
 
 set(CMAKE_CXX_STANDARD 20)
 
+enable_testing()
 add_subdirectory(tests)
 
 # Adding pugixml source
