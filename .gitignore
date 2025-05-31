@@ -41,3 +41,7 @@ compile_commands.json
 
 # === Backup files ===
 *~
+
+# === Temporary files used during GitHub Actions ===
+commits.json
+prs.json
