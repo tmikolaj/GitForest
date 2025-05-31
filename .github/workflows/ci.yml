@@ -54,7 +54,6 @@ jobs:
           cd build
           cmake .. -GNinja
           ninja
-          ./GitForest_tests
           ./GitForest
           ctest --output-on-failure
 
