@@ -2,7 +2,7 @@
 
 Manager::Manager(Sprite spruce, Sprite cherryBlossomTree, std::vector<float> positions) : gen(rd()),
 m_spruce(spruce), m_cherryBlossomTree(cherryBlossomTree), m_positions(positions),
-placedSpruces(-1), placedCherryBlossomTrees(-1), totalCommits(-1), totalPrs(-1),
+placedSpruces(-1), placedCherryBlossomTrees(-1), totalCommits(-1), totalPrs(-1), forests(-1),
 jsonFileManager(totalCommits, totalPrs, placedSpruces, placedCherryBlossomTrees, forests, m_positions) {
 
 }
@@ -29,10 +29,13 @@ void Manager::load() {
         std::cerr << "Failed to load placedCherryBlossomTrees variable from json\n";
         exit(1);
     } else if (totalCommits == -1) {
-        std::cerr << "Failed to load totalCommits variable from json (not yet finished)" << '\n';
+        std::cerr << "Failed to load totalCommits variable from json" << '\n';
         exit(1);
     } else if (totalPrs == -1) {
-        std::cerr << "Failed to load totalPrs variable from json (not yet finished)" << '\n';
+        std::cerr << "Failed to load totalPrs variable from json" << '\n';
+        exit(1);
+    } else if (forests == -1) {
+        std::cerr << "Failed to load forests variable from json" << '\n';
         exit(1);
     }
 
@@ -80,7 +83,7 @@ void Manager::process() {
 void Manager::save() {
     std::cout << "saving variables\n";
     jsonFileManager.saveJsonFile();
-    std::cout << "save succesful\n";
+    std::cout << "save successful\n";
 }
 void Manager::resetBackground() {
     background.reset();
