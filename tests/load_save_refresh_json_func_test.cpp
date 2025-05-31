@@ -64,9 +64,33 @@ static bool checkVector(const std::vector<float>& v, const std::vector<float>& e
     }
     return true;
 }
+static void write_apidata_file(int commits, int prs) {
+    rapidjson::Document doc;
+    doc.SetObject();
+    auto& alloc = doc.GetAllocator();
+
+    doc.AddMember("commits", commits, alloc);
+    doc.AddMember("prs", prs, alloc);
+
+    rapidjson::StringBuffer sb;
+    rapidjson::PrettyWriter<rapidjson::StringBuffer> writer(sb);
+    doc.Accept(writer);
+
+    std::ofstream ofs("../apidata.json");
+    REQUIRE(ofs.is_open());
+    ofs << sb.GetString();
+    ofs.close();
+}
+static void remove_apidata_file() {
+    std::remove("../apidata.json");
+}
 TEST_CASE("loadJsonFile() success path", "[load]") {
     remove_saved_json();
+    remove_apidata_file();
+
     std::vector<float> expected = {172, 258, 344, 433, 512, 602, 682};
+
+    write_apidata_file(75, 50);
     write_json_file(3, 5, 1, expected);
 
     totalCommits = 0;
@@ -80,6 +104,9 @@ TEST_CASE("loadJsonFile() success path", "[load]") {
 
     REQUIRE_NOTHROW(jsonFileManager.loadJsonFile());
 
+    REQUIRE(totalCommits == 75);
+    REQUIRE(totalPrs == 50);
+
     REQUIRE(placedSpruces == 3);
     REQUIRE(placedCherryBlossomTrees == 5);
     REQUIRE(forests == 1);
@@ -90,8 +117,11 @@ TEST_CASE("loadJsonFile() success path", "[load]") {
 }
 TEST_CASE("saveJsonFile() overwrites correctly", "[save]") {
     remove_saved_json();
+    remove_apidata_file();
 
+    write_apidata_file(0, 0);
     write_json_file(0, 0, 0, {});
+
 
     totalCommits = 0;
     totalPrs = 0;
@@ -130,6 +160,7 @@ TEST_CASE("saveJsonFile() overwrites correctly", "[save]") {
     REQUIRE(doc["forests"] == 2);
 
     remove_saved_json();
+    remove_apidata_file();
 }
 TEST_CASE("loadJsonFile() throws on missing file", "[load][error]") {
     remove_saved_json();
