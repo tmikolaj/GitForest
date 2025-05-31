@@ -1,0 +1,54 @@
+# Run manually on GitHub only once to reset saved.json file
+# otherwise it will break the script (it wont show the actual data)
+name: Reset saved.json
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  reset-json:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set saved.json to default content
+        run: |
+          cd $(dirname #$GITHUB_WORKSPACE") # one directory up
+          cat <<EOF > saved.json
+          {
+            "placedSpruces": 0,
+            "placedCherryBlossomTrees": 0,
+            "availablePos": [
+              172,
+              258,
+              344,
+              433,
+              512,
+              602,
+              682
+            ],
+            "positions": [
+              172,
+              258,
+              344,
+              433,
+              512,
+              602,
+              682
+            ],
+            "forests": 0
+          }
+          EOF
+
+      - name: Commit and push saved.json
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          
+          git commit -m "Reset saved.json"
+          git push
