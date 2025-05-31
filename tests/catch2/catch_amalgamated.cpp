@@ -13,6 +13,8 @@
 //  You probably shouldn't edit it directly.
 //  ----------------------------------------------------------
 
+#define CATCH_CONFIG_MAIN
+
 #include "catch_amalgamated.hpp"
 
 
