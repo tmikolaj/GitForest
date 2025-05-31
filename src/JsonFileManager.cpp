@@ -160,7 +160,7 @@ void JsonFileManager::saveJsonFile() {
         rapidjson::Document::AllocatorType& allocator = doc.GetAllocator();
 
         for (float pos : _m_positions) {
-            posArray.PushBack(pos, allocator);
+            posArray.PushBack(static_cast<int>(pos), allocator);
         }
     } else {
         throw std::runtime_error("JsonFileManager::saveJsonFile: Missing or invalid 'availablePos'");
