@@ -56,6 +56,35 @@ void JsonFileManager::loadJsonFile() {
     } else {
         throw std::runtime_error("JsonFileManager::loadJsonFile: Missing or invalid 'forests'");
     }
+
+    std::ifstream ifsApiData("../apidata.json");
+    if (!ifsApiData.is_open()) {
+        throw std::runtime_error("JsonFileManager::loadJsonFile: Could not open json file ('../apidata.json')");
+    }
+
+    std::stringstream bufferApiData;
+    bufferApiData << ifsApiData.rdbuf();
+    std::string apiData = bufferApiData.str();
+    ifsApiData.close();
+
+    rapidjson::Document apidoc;
+    apidoc.Parse(apiData.c_str());
+
+    if (apidoc.HasParseError()) {
+        throw std::runtime_error("JsonFileManager::loadJsonFile: Failed to parse json file ('../apidata.json')");
+    }
+
+    if (apidoc.HasMember("commits") && apidoc["commits"].IsInt()) {
+        m_totalCommits = apidoc["commits"].GetInt();
+    } else {
+        throw std::runtime_error("JsonFileManager::loadJsonFile: Missing or invalid 'commits'");
+    }
+
+    if (apidoc.HasMember("prs") && apidoc["prs"].IsInt()) {
+        m_totalPrs = apidoc["prs"].GetInt();
+    } else {
+        throw std::runtime_error("JsonFileManager::loadJsonFile: Missing or invalid 'prs'");
+    }
 }
 void JsonFileManager::refresh() {
     if (!_m_positions.empty()) {
