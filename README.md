@@ -21,13 +21,38 @@ and new elements appear as the ecosystem grows
 
 ### 🚀 Installation
 
-**🚧 Under construction (project not yet finished!!!)**
+1. Create a fork
+![Fork](assets/readme-installation/gitforest-installation-fork.png)
+2. Go to your profile settings
+3. Scroll down and click developer settings
+![Profile settings](assets/readme-installation/gitforest-installation-profilesettings.png)
+4. Click on personal access tokens and then on token (classic)
+![PAT](assets/readme-installation/gitforest.installation-pat.png)
+5. Click generate new token (for general use)
+6. Name it however you like and select repo scope
+![Repo scope](assets/readme-installation/gitforest-installation-reposcope.png)
+7. Scroll down and click generate token (make sure to copy it)
+8. Go back to the forked repository and go to repository settings
+9. Click on secrets and variables then actions
+![Repo settings](assets/readme-installation/gitforest-installation-reposettings.png)
+10. In repository secrets edit the API_KEY secret and paste your personal access token
+11. Click on variables and edit USERNAME to match your username and year to match the current year
+12. Go to repository actions and click on reset saved.json (ci might not show yet)
+![Workflows](assets/readme-installation/gitforest-installation-actions.png)
+13. Click run workflow
+![Run workflow](assets/readme-installation/gitforest-installation-runworkflow.png)
+14. Done! The ci script runs automatically every 10 minutes which is responsible for updating the svg
+15. If you want to have it in your profile README go to assets/forest.svg and copy the raw link to it then paste it 
+in your README like this
 
 ### 🧩 Technologies
 
 - C++
+  - rapidjson library
+  - pugixml library
+  - catch2 framework
 - GitHub API
-- SVG
+- SVGs (made in figma)
 
 ### 📅 Roadmap
 
