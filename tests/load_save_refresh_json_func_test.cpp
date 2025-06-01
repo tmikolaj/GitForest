@@ -114,6 +114,7 @@ TEST_CASE("loadJsonFile() success path", "[load]") {
     REQUIRE(checkVector(positions, expected) == true);
 
     remove_saved_json();
+    remove_apidata_file();
 }
 TEST_CASE("saveJsonFile() overwrites correctly", "[save]") {
     remove_saved_json();
@@ -164,6 +165,7 @@ TEST_CASE("saveJsonFile() overwrites correctly", "[save]") {
 }
 TEST_CASE("loadJsonFile() throws on missing file", "[load][error]") {
     remove_saved_json();
+    remove_apidata_file();
 
     int tc=0, tp=0, ps=0, pc=0, fr=0;
     std::vector<float> psv = {};
@@ -172,12 +174,14 @@ TEST_CASE("loadJsonFile() throws on missing file", "[load][error]") {
 }
 TEST_CASE("loadJsonFile() throws on bad JSON", "[load][error]") {
     remove_saved_json();
+    remove_apidata_file();
 
     {
         std::ofstream ofs("../saved.json");
         REQUIRE(ofs.is_open());
         ofs << "{ not valid json ";
     }
+    write_apidata_file(0, 0);
 
     int tc=0, tp=0, ps=0, pc=0, fr=0;
     std::vector<float> psv = {};
@@ -186,10 +190,12 @@ TEST_CASE("loadJsonFile() throws on bad JSON", "[load][error]") {
     REQUIRE_THROWS_AS(mgr.loadJsonFile(), std::runtime_error);
 
     remove_saved_json();
+    remove_apidata_file();
 }
 
 TEST_CASE("saveJsonFile() throws on missing initial file", "[save][error]") {
     remove_saved_json();
+    remove_apidata_file();
 
     int tc=0, tp=0, ps=1, pc=2, fr=0;
     std::vector<float> psv = {344, 433, 602, 682};
@@ -208,6 +214,7 @@ TEST_CASE("saveJsonFile overwrites existing values", "[json][save][overwrite]") 
         })";
         out.close();
     }
+    write_apidata_file(85, 30);
 
     int dummyTotalCommits = 0;
     int dummyTotalPrs = 0;
@@ -238,7 +245,10 @@ TEST_CASE("saveJsonFile overwrites existing values", "[json][save][overwrite]") 
 }
 TEST_CASE("refresh actually refreshing the vector", "[refresh]") {
     remove_saved_json();
+    remove_apidata_file();
+
     write_json_file(0, 0, 0, {});
+    write_apidata_file(0, 0);
 
     std::vector<float> positions = {};
 
@@ -253,7 +263,10 @@ TEST_CASE("refresh actually refreshing the vector", "[refresh]") {
 }
 TEST_CASE("refresh returning nothing if vector is not empty", "[refresh][return]") {
     remove_saved_json();
+    remove_apidata_file();
+
     write_json_file(0, 0, 0, {172});
+    write_apidata_file(10, 0);
 
     std::vector<float> positions = {};
 
