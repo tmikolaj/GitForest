@@ -36,8 +36,8 @@ and new elements appear as the ecosystem grows
 - [X] Create Background
 - [X] Make README
 - [X] Test if a library for embedding SVG is working
-- [ ] Test different inputs
-- [ ] Integrate GitHub API
+- [X] Test different inputs
+- [X] Integrate GitHub API
 - MIGHT TAKE LONGER:
 - [ ] Change backgrounds depending on day streaks
 - [ ] Add more forest elements
