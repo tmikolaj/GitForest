@@ -2,7 +2,7 @@
 
 Manager::Manager(Sprite spruce, Sprite cherryBlossomTree, std::vector<float> positions) : gen(rd()),
 m_spruce(spruce), m_cherryBlossomTree(cherryBlossomTree), m_positions(positions),
-placedSpruces(-1), placedCherryBlossomTrees(-1), totalCommits(-1), totalPrs(-1), forests(-1),
+placedSpruces(-1), placedCherryBlossomTrees(-1), totalCommits(-1), totalPrs(-1), forests(-2),
 jsonFileManager(totalCommits, totalPrs, placedSpruces, placedCherryBlossomTrees, forests, m_positions) {
 
 }
@@ -34,9 +34,14 @@ void Manager::load() {
     } else if (totalPrs == -1) {
         std::cerr << "Failed to load totalPrs variable from json" << '\n';
         exit(1);
-    } else if (forests == -1) {
+    } else if (forests == -2) {
         std::cerr << "Failed to load forests variable from json" << '\n';
         exit(1);
+    } else if (forests == -1) {
+        // If someone  forks repo they will have filled background (not reset by any yaml script)
+        // This method will ensure that the background is empty and the forests will be incremented
+        // So after this call forests = 0 and background is empty
+        resetBackground();
     }
 
     process();
