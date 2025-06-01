@@ -1,11 +1,7 @@
 #include <vector>
-#include <random>
 #include <iostream>
 #include "catch_amalgamated.hpp"
 #include "globals.h"
-
-std::random_device rd;
-std::mt19937 gen(rd());
 
 const int COMMITS_FOR_SPRUCE = 25;
 const int PRS_FOR_CHERRY_BLOSSOM_TREE = 10;
@@ -29,32 +25,21 @@ void process() {
     // Instantiating spruces
     // The "random" placement logic not completed!!!
     for (int i = 0; i < spruceCount; i++) {
-        if (m_positions.empty()) {
-            exit(1); // Temporary
-        }
-        std::uniform_int_distribution<> distr(0, m_positions.size() - 1);
-
-        int index = distr(gen);
-        m_positions.erase(m_positions.begin() + index); // erase used position
-
         placedSpruces++;
     }
     // Instantiating cherry blossom trees
     for (int i = 0; i < cherryBlossomTreeCount; i++) {
-        if (m_positions.empty()) {
-            exit(1); // Temporary
-        }
-        std::uniform_int_distribution<> distr(0, m_positions.size() - 1);
-
-        int index = distr(gen);
-        m_positions.erase(m_positions.begin() + index); // erase used position
-
         placedCherryBlossomTrees++;
     }
+}
+void reset() {
+    resSpruce = 0;
+    resCherryBlossomTree = 0;
 }
 
 TEST_CASE("Spruce placement logic", "[trees]") {
     SECTION("No commits, no spruces") {
+        reset();
         totalCommits = 0;
         placedSpruces = 0;
         process();
@@ -62,6 +47,7 @@ TEST_CASE("Spruce placement logic", "[trees]") {
     }
 
     SECTION("Exactly one spruce needed") {
+        reset();
         totalCommits = 25;
         placedSpruces = 0;
         process();
@@ -69,6 +55,7 @@ TEST_CASE("Spruce placement logic", "[trees]") {
     }
 
     SECTION("Already placed all needed spruces") {
+        reset();
         totalCommits = 75;
         placedSpruces = 3;
         process();
@@ -76,6 +63,7 @@ TEST_CASE("Spruce placement logic", "[trees]") {
     }
 
     SECTION("Some spruces placed, more needed") {
+        reset();
         totalCommits = 100;
         placedSpruces = 2;
         process();
@@ -83,24 +71,24 @@ TEST_CASE("Spruce placement logic", "[trees]") {
     }
 
     SECTION("Negative result doesn't happen") {
+        reset();
         totalCommits = 25;
         placedSpruces = 2;
         REQUIRE_THROWS_AS(process(), std::logic_error); // Updated: negative values should be prevented by logic
     }
 
-    // Commented it out cause it causes segfault, but it returns the expected value which is 9
-    // I know its caused by the random placement (which tries to delete an element from empty vector),
-    // but I havent implemented it yet
-    // SECTION("Random input") {
-    //     totalCommits = 498;
-    //     placedSpruces = 10;
-    //     process();
-    //     REQUIRE(resSpruce == 9);
-    // }
+    SECTION("Random input") {
+        reset();
+        totalCommits = 498;
+        placedSpruces = 10;
+        process();
+        REQUIRE(resSpruce == 9);
+    }
 }
 
 TEST_CASE("Cherry blossom placement logic", "[trees]") {
     SECTION("Exactly one cherry blossom needed") {
+        reset();
         totalPrs = 10;
         placedCherryBlossomTrees = 0;
         process();
@@ -108,6 +96,7 @@ TEST_CASE("Cherry blossom placement logic", "[trees]") {
     }
 
     SECTION("Already placed all needed cherry blossoms") {
+        reset();
         totalPrs = 50;
         placedCherryBlossomTrees = 5;
         process();
@@ -115,6 +104,7 @@ TEST_CASE("Cherry blossom placement logic", "[trees]") {
     }
 
     SECTION("Some cherry blossoms placed, more needed") {
+        reset();
         totalPrs = 80;
         placedCherryBlossomTrees = 6;
         process();
