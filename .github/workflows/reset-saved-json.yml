@@ -41,7 +41,7 @@ jobs:
               602,
               682
             ],
-            "forests": 0
+            "forests": -1
           }
           EOF
 
