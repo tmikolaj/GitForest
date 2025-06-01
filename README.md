@@ -1,6 +1,4 @@
-# 🌲 GitForest 🌲
-
-# 🚧 Project is currently under construction
+![GitForest](assets/GitForest-logo-v2.png)
 
 ## 🤨 What is it?
 
