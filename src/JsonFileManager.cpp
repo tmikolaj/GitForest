@@ -185,3 +185,51 @@ void JsonFileManager::saveJsonFile() {
     ofs << outBuffer.GetString();
     ofs.close();
 }
+std::string JsonFileManager::determineBackground() {
+    std::ifstream ifs("../config.json");
+    if (!ifs.is_open()) {
+        throw std::runtime_error("JsonFileManager::determineBackground: Could not open json file '../config.json'");
+    }
+
+    std::stringstream buffer;
+    buffer << ifs.rdbuf();
+    std::string jsonString = buffer.str();
+    ifs.close();
+
+    rapidjson::Document doc;
+    doc.Parse(jsonString.c_str());
+
+    if (doc.HasParseError()) {
+        throw std::runtime_error("JsonFileManager::determineBackground: Failed to parse json file '../config.json'");
+    }
+
+    std::string colorsAllowed[8] = { "mystic", "golden", "frost", "emerald", "purple", "yellow", "blue", "green" };
+    std::string toReturn[8] = { "spruce-purple", "spruce-yellow", "spruce-blue", "spruce-green", "spruce-purple", "spruce-yellow", "spruce-blue", "spruce-green" };
+
+    if (doc.HasMember("backgroundColor") && doc["backgroundColor"].IsString()) {
+        for (int i = 0; i < 8; i++) {
+            if (colorsAllowed[i] == doc["backgroundColor"].GetString()) {
+                if (doc["backgroundColor"].GetString() != doc["currColor"].GetString()) {
+                   doc["currColor"].SetString(doc["backgroundColor"].GetString(), doc.GetAllocator());
+
+                    rapidjson::StringBuffer jsonbuffer;
+                    rapidjson::PrettyWriter<rapidjson::StringBuffer> writer(jsonbuffer);
+                    doc.Accept(writer);
+
+                    std::ofstream ofs("../config.json");
+                    if (!ofs) {
+                        throw std::runtime_error("JsonFileManager::determineBackground: Could not open json file '../config.json'");
+                    }
+                    ofs << jsonbuffer.GetString();
+                    ofs.close();
+                }
+                return "../assets/" + toReturn[i] + ".svg";
+            }
+            throw std::runtime_error("JsonFileManager::determineBackground: Invalid color in config");
+        }
+    } else {
+        throw std::runtime_error("JsonFileManager::determineBackground: Missing or invalid 'backgroundColor'");
+    }
+
+    return "";
+}
