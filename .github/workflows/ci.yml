@@ -52,7 +52,7 @@ jobs:
         env:
           COLOR: ${{ vars.BACKGROUND_COLOR }}
         run: |
-          jq ".backgroundColor = "\${COLOR}\"" config.json > tmp.json && mv tmp.json config.json
+          jq --arg color "$COLOR" '.backgroundColor = $color' config.json > tmp.json && mv tmp.json config.json
       - name: Build and run tests
         run: |
           mkdir -p build
