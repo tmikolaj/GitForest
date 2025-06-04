@@ -71,7 +71,7 @@ jobs:
           if git diff --quiet && git diff --cached --quiet; then
             echo "No changes to commit"
           else
-            git add apidata.json saved.json assets/forest.svg
+            git add apidata.json saved.json assets/forest.svg config.json
             git commit --amend --no-edit || echo "Nothing to amend"
             git push --force
           fi
