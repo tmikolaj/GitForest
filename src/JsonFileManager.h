@@ -27,6 +27,7 @@ public:
     void loadJsonFile();
     void refresh();
     void saveJsonFile();
+    std::string determineBackground();
 };
 
 #endif //JSONFILEMANAGER_H
