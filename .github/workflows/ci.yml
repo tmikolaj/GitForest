@@ -48,7 +48,11 @@ jobs:
           > apidata.json
           
           rm commits.json prs.json
-
+      - name: Update background color
+        env:
+          COLOR: ${{ vars.BACKGROUND_COLOR }}
+        run: |
+          jq ".backgroundColor = "\${COLOR}\"" config.json > tmp.json && mv tmp.json config.json
       - name: Build and run tests
         run: |
           mkdir -p build
