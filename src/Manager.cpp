@@ -53,7 +53,6 @@ void Manager::process() {
     int cherryBlossomTreeCount = (totalPrs / PRS_FOR_CHERRY_BLOSSOM_TREE) - placedCherryBlossomTrees;
 
     // Instantiating spruces
-    // The "random" placement logic not completed!!!
     for (int i = 0; i < spruceCount; i++) {
         if (m_positions.empty()) {
             resetBackground();
@@ -92,10 +91,12 @@ void Manager::save() {
 }
 void Manager::resetBackground() {
     background.reset();
-    pugi::xml_parse_result result = background.load_file("../assets/Background.svg");
+
+    std::string path = jsonFileManager.determineBackground();
+    pugi::xml_parse_result result = background.load_file(path.c_str());
 
     if (!result) {
-        throw std::runtime_error("Manager::resetBackground: Failed to load ../assets/Background.svg");
+        throw std::runtime_error("Manager::resetBackground: Failed to load " + path);
     }
     jsonFileManager.refresh();
 }
