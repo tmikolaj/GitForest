@@ -45,3 +45,4 @@ compile_commands.json
 # === Temporary files used during GitHub Actions ===
 commits.json
 prs.json
+tmp.json
