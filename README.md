@@ -62,7 +62,8 @@ in your README like this
 
 ### 🔧 Config
 
-Currently only the background color can be customized
+Currently only the background color can be customized. Please note that the background color
+will actually update when the forest fills up or if the script runs for the first time.
 Here are what they look like and what to type in BACKGROUND_COLOR variable:
 - mystic or purple:
 
@@ -98,4 +99,4 @@ Here are what they look like and what to type in BACKGROUND_COLOR variable:
 - MIGHT TAKE LONGER:
 - [ ] Change backgrounds depending on day streaks
 - [ ] Add more forest elements
-- [ ] Choosing a background color palette
+- [X] Choosing a background color palette
