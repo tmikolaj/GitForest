@@ -1,4 +1,9 @@
 ![GitForest](assets/GitForest-logo-v2.png)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+![Project Status](https://img.shields.io/badge/status-maintained-brightgreen)
+![C++](https://img.shields.io/badge/C%2B%2B-00599C?logo=c%2B%2B&logoColor=white)
+![GitHub last commit](https://img.shields.io/github/last-commit/tmikolaj/GitForest)
+![Made with ❤️](https://img.shields.io/badge/Made%20with-%E2%9D%A4-red)
 
 ## 🤨 What is it?
 
