@@ -15,6 +15,12 @@ filled) will be stored and displayed. GitForest helps you visualize
 consistency, progress and growth in a more organic, motivating and fun
 way.
 
+### 🌳 How Does the Forest Grow?
+
+ - 🌲 One spruce = **25 commits**
+ - 🌸 One cherry blossom tree = **10 pull requests**
+ - 🪴 More coming soon...
+
 ### ✨ Features
 
  - 🌳 **Visual growth:** When you contribute more you see trees grow 
