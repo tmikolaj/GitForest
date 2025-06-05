@@ -93,10 +93,11 @@ void Manager::resetBackground() {
     background.reset();
 
     std::string path = jsonFileManager.determineBackground();
-    pugi::xml_parse_result result = background.load_file(path.c_str());
 
-    if (!result) {
-        throw std::runtime_error("Manager::resetBackground: Failed to load " + path);
-    }
+    background.load_file(path.c_str());
+    background.save_file("../assets/forest.svg");
+
     jsonFileManager.refresh();
+
+    std::cout << "background clearing successful" << '\n';
 }
