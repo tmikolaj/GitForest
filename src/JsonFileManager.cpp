@@ -204,7 +204,7 @@ std::string JsonFileManager::determineBackground() {
     }
 
     std::string colorsAllowed[8] = { "mystic", "golden", "frost", "emerald", "purple", "yellow", "blue", "green" };
-    std::string toReturn[8] = { "spruce-purple", "spruce-yellow", "spruce-blue", "spruce-green", "spruce-purple", "spruce-yellow", "spruce-blue", "spruce-green" };
+    std::string toReturn[8] = { "background-purple", "background-yellow", "background-blue", "background-green", "background-purple", "background-yellow", "background-blue", "background-green" };
 
     if (doc.HasMember("backgroundColor") && doc["backgroundColor"].IsString()) {
         for (int i = 0; i < 8; i++) {
