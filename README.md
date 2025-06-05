@@ -1,4 +1,4 @@
-![GitForest](assets/GitForest-logo-v2.png)
+![GitForest](assets/GitForest-logo-v3.png)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 ![Project Status](https://img.shields.io/badge/status-maintained-brightgreen)
 ![C++](https://img.shields.io/badge/C%2B%2B-00599C?logo=c%2B%2B&logoColor=white)
