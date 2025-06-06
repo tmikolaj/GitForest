@@ -103,7 +103,7 @@ Here are what they look like and what to type in BACKGROUND_COLOR variable:
 - SVGs (made in figma)
 
 ### 🤝 Contributing
-Have ideas for GitForest? Feel free to open an issue or submit a pull request!
+Have ideas for GitForest? Feel free to open an **issue** or submit a **pull request**!
 
 ### 📅 Roadmap
 
