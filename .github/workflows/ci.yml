@@ -62,6 +62,30 @@ jobs:
           ./GitForest
           ctest --output-on-failure
 
+      - name: Update profile README with forests value
+        if: ${{ vars.DISPLAY_FORESTS == 'yes' || vars.DISPLAY_FORESTS == 'true' }}
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
+          USER: ${{ vars.USERNAME }}
+        run: |
+          forests=$(jq -r '.forests' saved.json)
+
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
+
+          git clone https://x-access-token:${API_KEY}@github.com/${USER}/${USER}.git profile-repo
+          cd profile-repo
+
+          sed -i "/<!-- forests -->/,/<!-- endforests -->/c\\<!-- forests -->\n$forests\n<!-- endforests -->" README.md
+
+          if git diff --quiet; then
+            echo "No README changes"
+          else
+            git add README.md
+            git commit -m "Update forests value in profile README"
+            git push origin main
+          fi
+
       - name: Commit and push changes
         run: |
           git config user.name "github-actions"
