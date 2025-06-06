@@ -76,12 +76,7 @@ jobs:
           git clone https://x-access-token:${API_KEY}@github.com/${USER}/${USER}.git profile-repo
           cd profile-repo
 
-          sed -i "/<!-- forests -->/,/<!-- endforests -->/ {
-            /<!-- forests -->/b
-            /<!-- endforests -->/b
-            c\\$forests
-          }" README.md
-
+          sed -i "s/\(<!-- forests -->\)[0-9]*\(<!-- endforests -->\)/\1$forests\2/" README.md
 
           if git diff --quiet; then
             echo "No README changes"
