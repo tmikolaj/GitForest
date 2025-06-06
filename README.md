@@ -19,6 +19,7 @@ way.
 
  - 🌲 One spruce = **25 commits**
  - 🌸 One cherry blossom tree = **10 pull requests**
+ - 🌲🌲🌲 One forest = **7 trees**
  - 🪴 More coming soon...
 
 ### ✨ Features
