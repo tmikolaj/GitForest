@@ -1,11 +1,10 @@
 {
-    "placedSpruces": 9,
+    "placedSpruces": 10,
     "placedCherryBlossomTrees": 0,
     "availablePos": [
         172,
         344,
         433,
-        602,
         682
     ],
     "positions": [
