@@ -55,13 +55,13 @@ and new elements appear as the ecosystem grows
 
 ![Repo settings](assets/readme-installation/gitforest-installation-reposettings.png)
 
-10. In repository secrets edit the API_KEY secret and paste your personal access token
+10. In repository secrets add the API_KEY secret and paste your personal access token
 11. Click on variables and
-    - edit USERNAME to match your username
-    - edit YEAR to match current year
-    - edit BACKGROUND_COLOR (scroll down to Config)
-    - if you would like to have it in your repo with forest count displayed then set the variable
-    DISPLAY_FORESTS to true or yes if not then set it to no or false
+    - add and edit USERNAME to match your username
+    - add and edit YEAR to match current year
+    - add and edit BACKGROUND_COLOR (scroll down to Config)
+    - also add the variable DISPLAY_FORESTS and set it as yes/true if you would like to have the forests grown in your profile README
+    otherwise set it as no/false
 12. Go to repository actions and click on reset saved.json (ci might not show yet)
 
 ![Workflows](assets/readme-installation/gitforest-installation-actions.png)
@@ -73,7 +73,7 @@ and new elements appear as the ecosystem grows
 14. Done! The ci script runs automatically every 10 minutes which is responsible for updating the svg
 15. If you want to have it in your profile README go to assets/forest.svg and copy the raw link to it then paste it 
 in your README like this (if you also want to display the forests you have grown add this line
-<!-- forests -->0<!-- endforests --> and set DISPLAY_FORESTS variable to true or yes)
+</!-- forests -->0</!-- endforests --> (delete the slashes) and set DISPLAY_FORESTS variable to true or yes)
 
 ### 🔧 Config
 
