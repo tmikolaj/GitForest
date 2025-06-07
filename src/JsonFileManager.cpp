@@ -206,6 +206,10 @@ std::string JsonFileManager::determineBackground() {
     std::string colorsAllowed[8] = { "mystic", "golden", "frost", "emerald", "purple", "yellow", "blue", "green" };
     std::string toReturn[8] = { "background-purple", "background-yellow", "background-blue", "background-green", "background-purple", "background-yellow", "background-blue", "background-green" };
 
+    // currColor is the current background color and backgroundColor is the color to be changed when the forest is filled
+    if (!doc.HasMember("currColor")) {
+        throw std::runtime_error("JsonFileManager::determineBackground: Missing or invalid 'currColor'");
+    }
     if (doc.HasMember("backgroundColor") && doc["backgroundColor"].IsString()) {
         for (int i = 0; i < 8; i++) {
             if (colorsAllowed[i] == doc["backgroundColor"].GetString()) {
@@ -225,8 +229,8 @@ std::string JsonFileManager::determineBackground() {
                 }
                 return "../assets/" + toReturn[i] + ".svg";
             }
-            throw std::runtime_error("JsonFileManager::determineBackground: Invalid color in config");
         }
+        throw std::runtime_error("JsonFileManager::determineBackground: Invalid color in config");
     } else {
         throw std::runtime_error("JsonFileManager::determineBackground: Missing or invalid 'backgroundColor'");
     }
