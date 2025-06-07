@@ -1,10 +1,11 @@
 {
-    "placedSpruces": 9,
+    "placedSpruces": 15,
     "placedCherryBlossomTrees": 0,
     "availablePos": [
         172,
+        258,
         344,
-        433,
+        512,
         602,
         682
     ],
@@ -17,5 +18,5 @@
         602,
         682
     ],
-    "forests": 1
+    "forests": 2
 }
