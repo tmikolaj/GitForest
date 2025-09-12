@@ -8,12 +8,18 @@
 ## 🤨 What is it?
 
 GitForest is a dynamic, visually driven GitHub profile enhancement that
-turns your contribution history into a forest. The more you code, the
+turns your contribution history into a forest and **it lives in github actions**. The more you code, the
 bigger the forest grows. The forest will be periodically reset to prevent
 the forest from becoming to large however the data (how many forests you've
 filled) will be stored and displayed. GitForest helps you visualize
 consistency, progress and growth in a more organic, motivating and fun
 way.
+
+## 🌱 What does it look like?
+
+Depending on what you set in config (BACKGROUND_COLOR variable) you will get one of these.
+
+![GitForest](assets/readme-screenshots/gitforest.png)
 
 ### 🌳 How Does the Forest Grow?
 
@@ -28,6 +34,13 @@ way.
 and new elements appear as the ecosystem grows
  - 📈 **Progress tracker:** See how many forests you've filled over time
  - 🛠️ **GitHub integration:** Works directly with your contribution data
+
+## ⚡ Quick Start
+
+1. Fork this repo
+2. Add `API_KEY` secret with your personal access token
+3. Set `USERNAME`, `YEAR`, and `BACKGROUND_COLOR`
+4. Run the `reset saved.json` workflow
 
 ### 🚀 Installation
 
@@ -70,7 +83,7 @@ and new elements appear as the ecosystem grows
 
 ![Run workflow](assets/readme-installation/gitforest-installation-runworkflow.png)
 
-14. Done! The ci script runs automatically every 10 minutes which is responsible for updating the svg
+14. Done! The CI script runs automatically every 10 minutes which is responsible for updating the svg
 15. If you want to have it in your profile README go to assets/forest.svg and copy the raw link to it then paste it 
 in your README like this (if you also want to display the forests you have grown add this line
 </!-- forests -->0</!-- endforests --> (without the slashes) and set DISPLAY_FORESTS variable to true or yes)
