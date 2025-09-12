@@ -73,7 +73,7 @@ and new elements appear as the ecosystem grows
 14. Done! The ci script runs automatically every 10 minutes which is responsible for updating the svg
 15. If you want to have it in your profile README go to assets/forest.svg and copy the raw link to it then paste it 
 in your README like this (if you also want to display the forests you have grown add this line
-</!-- forests -->0</!-- endforests --> (delete the slashes) and set DISPLAY_FORESTS variable to true or yes)
+</!-- forests -->0</!-- endforests --> (without the slashes) and set DISPLAY_FORESTS variable to true or yes)
 
 ### 🔧 Config
 
