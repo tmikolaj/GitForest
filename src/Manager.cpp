@@ -90,14 +90,37 @@ void Manager::save() {
     std::cout << "save successful\n";
 }
 void Manager::resetBackground() {
+    // Determine path to the correct background (without any trees)
+    std::string srcPath = jsonFileManager.determineBackground();
+    std::string dstPath = "../assets/forest.svg";
+
+    std::ifstream ifs(srcPath, std::ios::binary);
+    if (!ifs) {
+        std::cerr << "Failed to open source SVG: " << srcPath << '\n';
+        return;
+    }
+    std::string content((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
+    ifs.close();
+
+    std::ofstream ofs(dstPath, std::ios::binary | std::ios::trunc);
+    if (!ofs) {
+        std::cerr << "Failed to open destination SVG for writing: " << dstPath << '\n';
+        return;
+    }
+    ofs.write(content.data(), static_cast<std::streamsize>(content.size()));
+    ofs.close();
+
+    // Update pugixml
     background.reset();
+    pugi::xml_parse_result result = background.load_string(content.c_str());
+    if (!result) {
+        std::cerr << "Failed to parse SVG with pugixml: " << result.description() << '\n';
+        return;
+    }
 
-    std::string path = jsonFileManager.determineBackground();
-
-    background.load_file(path.c_str());
-    background.save_file("../assets/forest.svg");
+    background.save_file(dstPath.c_str());
 
     jsonFileManager.refresh();
 
-    std::cout << "background clearing successful" << '\n';
+    std::cout << "background clearing and copy successful" << '\n';
 }
