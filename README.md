@@ -5,6 +5,14 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/tmikolaj/GitForest)
 ![Made with ❤️](https://img.shields.io/badge/Made%20with-%E2%9D%A4-red)
 
+⚠️ Known issues
+
+- The `reset saved.json` script does not reset all data correctly.  
+- After the forest grows beyond 7 trees (175 commits), the background does not clear automatically; the forest then stops growing and no variation appears for higher-contribution users.
+
+At the moment, this limits the project for users with more than 175 contributions. Fixing the reset and background logic is on the roadmap. Despite these limitations, GitForest demonstrates GitHub Actions integration, JSON saving/loading, and SVG-based visualization of contribution data.
+
+
 ## 🤨 What is it?
 
 GitForest is a dynamic, visually driven GitHub profile enhancement that
@@ -127,6 +135,8 @@ Have ideas for GitForest? Feel free to open an **issue** or submit a **pull requ
 - [X] Test if a library for embedding SVG is working
 - [X] Test different inputs
 - [X] Integrate GitHub API
+- [ ] Fix script
+- [ ] Fix background not clearing
 - MIGHT TAKE LONGER:
 - [ ] Change backgrounds depending on day streaks
 - [ ] Add more forest elements
